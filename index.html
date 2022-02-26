@@ -1,84 +1,1024 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2113.3">
-<style>
-  h1 {
-  display: block;
-  font-size: 60px;
-  margin-top: 25px;
-  margin-bottom: 25px;
-  margin-left: 25px;
-  margin-right: 25px;
-  font-weight: bold;
-  font-family: Helvetica;
-}
-
-    h2 {
-  display: block;
-  font-size: 30px;
-  margin-top: 25px;
-  margin-bottom: 25px;
-  margin-left: 25px;
-  margin-right: 25px;
-  font-weight: bold;
-  font-family: Helvetica;
-}
-    p {
-  display: block;
-  font-size: 20px;
-  margin-top: 25px;
-  margin-bottom: 25px;
-  margin-left: 25px;
-  margin-right: 25px;
-  font-family: Helvetica;
-}
-
-  </style>
-</head>
-  <body>
+<!DOCTYPE html>
+<!-- saved from url=(0022)http://127.0.0.1:4319/ -->
+<html class=""><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   
-<p><strong>The Kawhi Leonard Puzzle: Projecting NBA Three-Point Shooting</strong></p>
-<p><em>By: Ben Wieland</em></p>
-<p>On April 14, 2011, after two seasons at San Diego State, forward Kawhi Leonard declared for the NBA draft. In his college career, Leonard attempted 164 three-pointers &mdash; a little over two per game &mdash; and knocked down just 41 of them, working out to an eerily symmetric 25.0 three-point percentage. In other words, he made just one of every four threes attempted.&nbsp;</p>
-<p>That wouldn&rsquo;t be good enough at the NBA level. Frankly, it wasn&rsquo;t good enough at the college level. Per Basketball Reference, of the 819 players to attempt as many threes as Leonard in the 2009 and 2010 seasons, his 25.0 clip ranked 818th. Only Tyshawn Patterson, a guard at Stetson University who most recently played in 2017 for the Orangeville A&rsquo;s of the Canadian NBL, made a lower percentage of threes than future NBA Finals MVP Kawhi Leonard.&nbsp;</p>
-<p>Scouts noticed this deficiency, too. &ldquo;Leonard is not only an average ball-handler, but he also struggles to make shots consistently from beyond the arc,&rdquo; Draft Express wrote in June 2011. &ldquo;His 0.743 points per shot on jumpers ranks 16th of 17 in the class, where he shot an abysmal 31% from the field. His struggles extend both to his catch and shoot jumpers (32%) and pull-ups (28%).&rdquo; Leonard&rsquo;s rebounding and defense would get him selected in the first round, but concerns over his jump shot prevented him from vaulting into the draft class&rsquo;s top tier.&nbsp;</p>
-<p>On draft night, Leonard slid all the way to pick 15. The Pacers selected Leonard, and before he could even finish taking a picture with commissioner Adam Silver in an Indiana baseball cap, dealt Leonard, Erazem Lorbek, and the 42nd pick in the draft to the San Antonio Spurs for George Hill.&nbsp;</p>
-<p>Five picks ahead of Leonard, the Sacramento Kings chose a surefire shooting prospect who blew Kawhi&rsquo;s raw shooting statistics out of the water. In the 2010-11 season alone, Jimmer Fredette made 124 three-pointers, tripling Kawhi&rsquo;s career totals. He attempted 8.5 threes per game that season, more than any other player in the Mountain West (a conference Fredette and Leonard shared), while making 39.6 percent of them, <em>also </em>better than any other player in the Mountain West.&nbsp;</p>
-<p>There are no sure things in the NBA &mdash; Fredette was a little older than your typical prospect, fairly undersized, and needed the ball in his hands &mdash; but Jimmer&rsquo;s shooting ability was as close as you could get to a guarantee.&nbsp;</p>
-<p>Well, as it turns out, projecting NBA performance isn&rsquo;t that easy. Jimmer bounced around the league for a little while, shooting the ball somewhat consistently in his early years in the league but eventually fading into obscurity. He never matched his rookie mark of 78 made threes in a single season, and finished his career at a respectable 37.2 percent.&nbsp;</p>
-<p>Kawhi, on the other hand, worked with shot doctor Chip Engelland in San Antonio and turned into a formidable three-point threat: in every season since 2015-16 where he&rsquo;s played 50 games, Leonard has made more threes than Jimmer ever did in a single season, and he&rsquo;s shot a better percentage than Fredette&rsquo;s career mark in all but one of those seasons.&nbsp;</p>
-<p>All of this is a very roundabout way to introduce a simple fact: no matter how good the data, no model will ever be able to look at a college player&rsquo;s shooting statistics and predict their NBA three-point percentage. Given that any such projection model is ultimately doomed for failure, it may seem a fool&rsquo;s errand to even attempt to project NBA three-point shooting from college statistics.&nbsp;</p>
-<p>However, in the words of British statistician George Box, &ldquo;all models are wrong, but some are useful.&rdquo; Even if no model exists that will take in a set of college numbers and spit out a player&rsquo;s NBA career arc, linear regression modeling can be useful to provide a general idea of which players project as good shooters and which players project poorly.&nbsp;</p>
-<p>Additionally, by looking at the residual outliers &mdash; players who the models were overly optimistic or pessimistic about &mdash; useful information about the types of prospects who might be overhyped or who might be diamonds in the rough can be identified.&nbsp;</p>
-<p>In this analysis, four predictors were used to estimate the response variable of NBA three-point percentage: two traditional college statistics, and two ShotQuality-exclusive metrics.&nbsp;</p>
-<p>Exploratory data analysis of a variety of statistics sourced from BartTorvik.com revealed that the two college statistics most strongly correlated with NBA three point percentage were intuitive: NCAA three-point percentage and NCAA free-throw percentage.&nbsp;</p>
-<p>In addition to those two variables, two ShotQuality variables were also included: the ShotQuality expected points per possession for each prospect on catch-and-shoot threes and off-dribble threes. Using these data points limited the scope of the dataset &mdash; SQ data only dates back to the 2019-20 season, and prospects without at least 10 off-dribble threes attempted were filtered out of the dataset to avoid the undue effects of tiny sample sizes.&nbsp;</p>
-<p>The resulting dataset contained 37 players from the past two draft classes, along with data on their NCAA, ShotQuality, and NBA statistics. A variety of linear regression models were generated from the data: one using every possible variable, one for each individual variable, one for the pairings of NCAA variables and ShotQuality variables, and one including the best NCAA predictor and the best ShotQuality predictor.&nbsp;</p>
-<p>Using adjusted R-squared, a measure of how much variance in NBA three-point percentage can be explained by the predictor variables that penalizes the use of useless predictors, combined with the square root of the mean squared errors, a measure of how much each predicted NBA three-point percentage varies from its actual value, we can compare the models.&nbsp;</p>
-<p>Looking at the relative performances of these models tells us a lot about the value of each college statistic in predicting NBA three-point percentage. Immediately, NCAA three-point percentage sticks out as the best predictor &mdash; in fact, a model using exclusively NCAA 3P% has a higher adjusted R-squared value than the model including all four variables!</p>
-<p>Lagging slightly behind NCAA three-point percentage is our first ShotQuality statistic, the expected points per possession on a catch-and-shoot three for each prospect. This stat significantly outperforms the other two variables on its own; however, when combined with NCAA three-point percentage, it contributes very little new information to the model. In fact, the model combining NCAA three-point percentage and SQ points per possession on catch-and-shoot threes actually has a <em>lower </em>adjusted R-squared value than NCAA three-point percentage alone. This is probably because the two variables are correlated, so any valuable information to be gleaned from SQ catch-and-shoot points per possession is already included in NCAA three-point percentage.</p>
-<p>The other two predictors, NCAA FT% and SQ points per possession on off-dribble threes, are the least useful. They underperform the other variables by far as individual linear model variables and contribute very little to multiple linear models. The one exception is NCAA FT%, which produces the most effective model of all when combined with NCAA 3P% by multiple R-squared, but the increase from the model using exclusively NCAA 3P% of 0.001 is almost negligible.&nbsp;</p>
-<p>OK, now that the nitty-gritty statistical analysis is out of the way, here comes the interesting part: visualizing each model&rsquo;s performance compared to actual NBA three-point percentage for each prospect included in the data. Cells are colored relative to other values in their columns &ndash; if a cell is especially green, that means that its column&rsquo;s model <em>really </em>liked that prospect; the reddest cells are for players that the model was especially pessimistic about.</p>
-<p>Taking a big-picture view of these models allows their usefulness to come into focus. Every single column generally trends from green to red as it descends &mdash; in other words, even if the models aren&rsquo;t perfect at guessing a player&rsquo;s <em>exact </em>three-point percentage, they&rsquo;re pretty good at guessing whether a player will be a good or bad shooter.&nbsp;</p>
-<p>Let&rsquo;s look at their success first: The models were correct on players like Desmond Bane, Tyrese Haliburton and Payton Pritchard, whose elite college shooting numbers across the board have translated to NBA success from beyond the arc thus far. On the other end of the spectrum, the models also accurately anticipated the worst NBA three-point shooters; players like Isaac Okoro and Ziaire Williams who entered the league with unrefined jumpers projected poorly and have performed poorly from three.&nbsp;</p>
-<p>The model using all four variables also, on the whole, effectively balanced information that might&rsquo;ve thrown off the estimations of the other models to make superior predictions. For example, while the other two models were extremely low on Arkansas guard Isaiah Joe&rsquo;s three point shooting despite Joe entering the draft billed as a three-point sniper, the all-variable prediction used Joe&rsquo;s elite free throw percentage to counterbalance his low three-point percentages and accurately project a middle-of-the-pack three-point percentage.&nbsp;</p>
-<p>Seeing where the models worked is useful, but perhaps an even more beneficial exercise is analyzing where the models went wrong. Which players fooled the models into overestimating their NBA performance, and how did they do it? And which draft picks slid under the radar of the models but turned into solid NBA three-point shooters?&nbsp;</p>
-<p>To find the biggest over- and underperformers, we can find the residuals for each model by subtracting each player&rsquo;s predicted performance from their actual NBA three-point percentage, and averaging these residuals across all three models. A positive average model error indicates a player outperformed the model, and a negative average model error indicates a player underperformed their projections.&nbsp;</p>
-<p>Let&rsquo;s start by looking at the five biggest overperformers in the dataset:</p>
-<p>Two of these outlier players &mdash; Desmond Bane and Tyrese Haliburton &mdash; can hardly be considered &ldquo;misses.&rdquo; Every single one of the three models correctly identified them as elite shooters, but failed to project <em>just </em>how high their three-point percentages would turn out to be.&nbsp;</p>
-<p>For Ayo Dosunmu and Quentin Grimes, the all-variable and NCAA 3P% models were both high on their shooting abilities, with skepticism coming from the ShotQuality model. Both Dosunmu and Grimes have overperformed their draft spots with the Bulls and Knicks, respectively, and shot the ball better than both the models and draft analysts expected.&nbsp;</p>
-<p>One notable trend in these four positive outliers: they were all multi-year college players at power-conference schools. Multiple seasons of competition against high-level opponents in college might make a draft pick more ready to make shots in the NBA in a way that none of the models can encapsulate.&nbsp;</p>
-<p>Tyrese Maxey, though, is the outlier among outliers: while he did play for an elite program at Kentucky, Maxey spent just one year in college, and entered the draft with major question marks about his shot from both draft analysts and all three models. He made just 33 of 113 threes attempted at Kentucky, shooting just 29.2%, and analysts noted his wonky shooting mechanics as reasons for concern at the NBA level.&nbsp;</p>
-<p>After shooting just 30.1% from three on 1.7 attempts per game as an NBA rookie &mdash; in line with what models and draft experts expected &mdash; Maxey made a huge leap entering his sophomore year with the Sixers. So far, he&rsquo;s shooting 39.9% from three on 3.5 attempts per game this year, making significant strides in both his volume and his efficiency. His development as a shooter is the most unanticipated overperformance in the data.&nbsp;</p>
-<p>Now, let&rsquo;s look at the other end of the spectrum: which players haven&rsquo;t panned out as shooters as well as the models expected?</p>
-<p>It makes sense to see Davion Mitchell on this list. In his final season at Baylor, Mitchell shot an unreal 44.7% from three as well as a solidly below-average 64.1% from the free throw line. He&rsquo;s regressed from that unsustainably high three-point percentage at the NBA level, shooting just 30.7% thus far.&nbsp;</p>
-<p>Ziaire Williams, CJ Elleby, and Jalen Suggs also appear on this list for reasons similar to Tyrese Haliburton and Desmond Bane on the previous list: the models were skeptical of all of their shooting abilities, but failed to anticipate just how poorly they&rsquo;d shoot the ball at the NBA level.&nbsp;</p>
-<p>Corey Kispert was a major miss for all three of the models, at least thus far in his career. He&rsquo;s struggled to get his shot off cleanly in the NBA with the regularity he did at Gonzaga, and he&rsquo;s plummeted from an elite 44% shooter on 6.5 attempts per game in college to a below-average 32.6% shooter on 2.9 attempts per game in the pros.&nbsp;</p>
-<p>For the most part, models using college statistics to project NBA three-point performance are generally not great at projecting a player&rsquo;s exact shooting percentages, but are solid tools to estimate a player&rsquo;s general caliber of shooting ability. If every metric agrees that a draft prospect will be on the top end of the distribution as an NBA shooter, it&rsquo;s a great sign for their future performance; the reverse holds true as well.&nbsp;</p>
-<p>These models &mdash; and college statistics in general &mdash; should never be the only pieces of information used to evaluate prospects as shooters. Additional information like the player&rsquo;s situation, the context of their team, their shot distribution, their age, and their mechanics are also useful and should be taken into account. Even totally holistic prospect evaluations will always be imperfect, too, as the case of Kawhi Leonard and Jimmer Fredette demonstrates. However, there is no doubt that incorporating statistics improves three-point projection when compared to simply relying on the eye test.&nbsp;</p>
-<p><em>All data as of February 3, 2022.&nbsp;</em></p>
+  <script type="application/shiny-singletons"></script>
+  <script type="application/html-dependencies">jquery[3.6.0];shiny-css[1.7.1];shiny-javascript[1.7.1];bootstrap[3.4.1]</script>
+<script src="./index_files/jquery.min.js"></script>
+<link href="./index_files/shiny.min.css" rel="stylesheet">
+<script src="./index_files/shiny.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="./index_files/bootstrap.min.css" rel="stylesheet">
+<link href="./index_files/bootstrap-accessibility.min.css" rel="stylesheet">
+<script src="./index_files/bootstrap.min.js"></script>
+<script src="./index_files/bootstrap-accessibility.min.js"></script>
+</head>
+<body>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-6">
+        <div id="overall" class="shiny-html-output shiny-bound-output" aria-live="polite"><div id="jabmeojqhg" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+  <style>@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+html {
+  font-family: Chivo, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#jabmeojqhg .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 3px;
+  border-top-color: rgba(0, 0, 0, 0);
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 3px;
+  border-bottom-color: rgba(0, 0, 0, 0);
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#jabmeojqhg .gt_heading {
+  background-color: #FFFFFF;
+  text-align: left;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#jabmeojqhg .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#jabmeojqhg .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 6px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#jabmeojqhg .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#jabmeojqhg .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 3px;
+  border-top-color: rgba(0, 0, 0, 0);
+  border-bottom-style: solid;
+  border-bottom-width: 3px;
+  border-bottom-color: #000000;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#jabmeojqhg .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: bolder;
+  text-transform: uppercase;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#jabmeojqhg .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: bolder;
+  text-transform: uppercase;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#jabmeojqhg .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#jabmeojqhg .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#jabmeojqhg .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 3px;
+  border-bottom-color: #000000;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#jabmeojqhg .gt_group_heading {
+  padding: 8px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: bolder;
+  text-transform: uppercase;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#jabmeojqhg .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: bolder;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#jabmeojqhg .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#jabmeojqhg .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#jabmeojqhg .gt_row {
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#jabmeojqhg .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: bolder;
+  text-transform: uppercase;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 12px;
+}
+
+#jabmeojqhg .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jabmeojqhg .gt_first_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+}
+
+#jabmeojqhg .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jabmeojqhg .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#jabmeojqhg .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#jabmeojqhg .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#jabmeojqhg .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#jabmeojqhg .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding: 4px;
+}
+
+#jabmeojqhg .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#jabmeojqhg .gt_sourcenote {
+  font-size: 12px;
+  padding: 4px;
+}
+
+#jabmeojqhg .gt_left {
+  text-align: left;
+}
+
+#jabmeojqhg .gt_center {
+  text-align: center;
+}
+
+#jabmeojqhg .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#jabmeojqhg .gt_font_normal {
+  font-weight: normal;
+}
+
+#jabmeojqhg .gt_font_bold {
+  font-weight: bold;
+}
+
+#jabmeojqhg .gt_font_italic {
+  font-style: italic;
+}
+
+#jabmeojqhg .gt_super {
+  font-size: 65%;
+}
+
+#jabmeojqhg .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 65%;
+}
+</style>
+  <table class="gt_table">
+  <thead class="gt_header">
+    <tr>
+      <th colspan="7" class="gt_heading gt_title gt_font_normal" style=""><strong>NBA Elo Rating Model</strong></th>
+    </tr>
+    <tr>
+      <th colspan="7" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style=""><em>Data scraped using nbastatR</em></th>
+    </tr>
+  </thead>
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Abbreviation</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Team</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Conference</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Division</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">WinPct</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Record</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">elo</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td class="gt_row gt_left">PHX</td>
+<td class="gt_row gt_left">Phoenix Suns</td>
+<td class="gt_row gt_left">West</td>
+<td class="gt_row gt_left">Pacific</td>
+<td class="gt_row gt_right" style="background-color: #1A9641; color: #FFFFFF;">0.817</td>
+<td class="gt_row gt_left">49-11</td>
+<td class="gt_row gt_right" style="background-color: #1A9641; color: #FFFFFF;">1208</td></tr>
+    <tr><td class="gt_row gt_left">MEM</td>
+<td class="gt_row gt_left">Memphis Grizzlies</td>
+<td class="gt_row gt_left">West</td>
+<td class="gt_row gt_left">Southwest</td>
+<td class="gt_row gt_right" style="background-color: #A5D869; color: #000000;">0.672</td>
+<td class="gt_row gt_left">41-20</td>
+<td class="gt_row gt_right" style="background-color: #99D265; color: #000000;">1123</td></tr>
+    <tr><td class="gt_row gt_left">GSW</td>
+<td class="gt_row gt_left">Golden State Warriors</td>
+<td class="gt_row gt_left">West</td>
+<td class="gt_row gt_left">Pacific</td>
+<td class="gt_row gt_right" style="background-color: #80C45D; color: #000000;">0.717</td>
+<td class="gt_row gt_left">43-17</td>
+<td class="gt_row gt_right" style="background-color: #B1DE74; color: #000000;">1101</td></tr>
+    <tr><td class="gt_row gt_left">MIA</td>
+<td class="gt_row gt_left">Miami Heat</td>
+<td class="gt_row gt_left">East</td>
+<td class="gt_row gt_left">Southeast</td>
+<td class="gt_row gt_right" style="background-color: #B3DE76; color: #000000;">0.650</td>
+<td class="gt_row gt_left">39-21</td>
+<td class="gt_row gt_right" style="background-color: #B3DE76; color: #000000;">1099</td></tr>
+    <tr><td class="gt_row gt_left">PHI</td>
+<td class="gt_row gt_left">Philadelphia 76ers</td>
+<td class="gt_row gt_left">East</td>
+<td class="gt_row gt_left">Atlantic</td>
+<td class="gt_row gt_right" style="background-color: #CBE98D; color: #000000;">0.610</td>
+<td class="gt_row gt_left">36-23</td>
+<td class="gt_row gt_right" style="background-color: #B5DF78; color: #000000;">1097</td></tr>
+    <tr><td class="gt_row gt_left">CHI</td>
+<td class="gt_row gt_left">Chicago Bulls</td>
+<td class="gt_row gt_left">East</td>
+<td class="gt_row gt_left">Central</td>
+<td class="gt_row gt_right" style="background-color: #B3DE76; color: #000000;">0.650</td>
+<td class="gt_row gt_left">39-21</td>
+<td class="gt_row gt_right" style="background-color: #BDE380; color: #000000;">1088</td></tr>
+    <tr><td class="gt_row gt_left">DAL</td>
+<td class="gt_row gt_left">Dallas Mavericks</td>
+<td class="gt_row gt_left">West</td>
+<td class="gt_row gt_left">Southwest</td>
+<td class="gt_row gt_right" style="background-color: #DBF09C; color: #000000;">0.583</td>
+<td class="gt_row gt_left">35-25</td>
+<td class="gt_row gt_right" style="background-color: #C8E88B; color: #000000;">1076</td></tr>
+    <tr><td class="gt_row gt_left">BOS</td>
+<td class="gt_row gt_left">Boston Celtics</td>
+<td class="gt_row gt_left">East</td>
+<td class="gt_row gt_left">Atlantic</td>
+<td class="gt_row gt_right" style="background-color: #E1F2A2; color: #000000;">0.574</td>
+<td class="gt_row gt_left">35-26</td>
+<td class="gt_row gt_right" style="background-color: #CAE98C; color: #000000;">1074</td></tr>
+    <tr><td class="gt_row gt_left">DEN</td>
+<td class="gt_row gt_left">Denver Nuggets</td>
+<td class="gt_row gt_left">West</td>
+<td class="gt_row gt_left">Northwest</td>
+<td class="gt_row gt_right" style="background-color: #E0F2A1; color: #000000;">0.576</td>
+<td class="gt_row gt_left">34-25</td>
+<td class="gt_row gt_right" style="background-color: #CFEB91; color: #000000;">1069</td></tr>
+    <tr><td class="gt_row gt_left">TOR</td>
+<td class="gt_row gt_left">Toronto Raptors</td>
+<td class="gt_row gt_left">East</td>
+<td class="gt_row gt_left">Atlantic</td>
+<td class="gt_row gt_right" style="background-color: #EEF8AE; color: #000000;">0.552</td>
+<td class="gt_row gt_left">32-26</td>
+<td class="gt_row gt_right" style="background-color: #D4EC95; color: #000000;">1064</td></tr>
+    <tr><td class="gt_row gt_left">UTA</td>
+<td class="gt_row gt_left">Utah Jazz</td>
+<td class="gt_row gt_left">West</td>
+<td class="gt_row gt_left">Northwest</td>
+<td class="gt_row gt_right" style="background-color: #C1E483; color: #000000;">0.627</td>
+<td class="gt_row gt_left">37-22</td>
+<td class="gt_row gt_right" style="background-color: #D6ED97; color: #000000;">1062</td></tr>
+    <tr><td class="gt_row gt_left">MIL</td>
+<td class="gt_row gt_left">Milwaukee Bucks</td>
+<td class="gt_row gt_left">East</td>
+<td class="gt_row gt_left">Central</td>
+<td class="gt_row gt_right" style="background-color: #D1EB93; color: #000000;">0.600</td>
+<td class="gt_row gt_left">36-24</td>
+<td class="gt_row gt_right" style="background-color: #E1F2A2; color: #000000;">1050</td></tr>
+    <tr><td class="gt_row gt_left">CLE</td>
+<td class="gt_row gt_left">Cleveland Cavaliers</td>
+<td class="gt_row gt_left">East</td>
+<td class="gt_row gt_left">Central</td>
+<td class="gt_row gt_right" style="background-color: #D5ED97; color: #000000;">0.593</td>
+<td class="gt_row gt_left">35-24</td>
+<td class="gt_row gt_right" style="background-color: #E4F4A5; color: #000000;">1046</td></tr>
+    <tr><td class="gt_row gt_left">MIN</td>
+<td class="gt_row gt_left">Minnesota Timberwolves</td>
+<td class="gt_row gt_left">West</td>
+<td class="gt_row gt_left">Northwest</td>
+<td class="gt_row gt_right" style="background-color: #FEFFBE; color: #000000;">0.525</td>
+<td class="gt_row gt_left">32-29</td>
+<td class="gt_row gt_right" style="background-color: #EAF6AA; color: #000000;">1040</td></tr>
+    <tr><td class="gt_row gt_left">LAC</td>
+<td class="gt_row gt_left">LA Clippers</td>
+<td class="gt_row gt_left">West</td>
+<td class="gt_row gt_left">Pacific</td>
+<td class="gt_row gt_right" style="background-color: #FFF2B0; color: #000000;">0.500</td>
+<td class="gt_row gt_left">31-31</td>
+<td class="gt_row gt_right" style="background-color: #FFFBBA; color: #000000;">1012</td></tr>
+    <tr><td class="gt_row gt_left">ATL</td>
+<td class="gt_row gt_left">Atlanta Hawks</td>
+<td class="gt_row gt_left">East</td>
+<td class="gt_row gt_left">Southeast</td>
+<td class="gt_row gt_right" style="background-color: #FFE49F; color: #000000;">0.475</td>
+<td class="gt_row gt_left">28-31</td>
+<td class="gt_row gt_right" style="background-color: #FFEFAC; color: #000000;">998</td></tr>
+    <tr><td class="gt_row gt_left">NOP</td>
+<td class="gt_row gt_left">New Orleans Pelicans</td>
+<td class="gt_row gt_left">West</td>
+<td class="gt_row gt_left">Southwest</td>
+<td class="gt_row gt_right" style="background-color: #FFBB70; color: #000000;">0.400</td>
+<td class="gt_row gt_left">24-36</td>
+<td class="gt_row gt_right" style="background-color: #FFE8A4; color: #000000;">990</td></tr>
+    <tr><td class="gt_row gt_left">CHA</td>
+<td class="gt_row gt_left">Charlotte Hornets</td>
+<td class="gt_row gt_left">East</td>
+<td class="gt_row gt_left">Southeast</td>
+<td class="gt_row gt_right" style="background-color: #FFEEAA; color: #000000;">0.492</td>
+<td class="gt_row gt_left">30-31</td>
+<td class="gt_row gt_right" style="background-color: #FFDB95; color: #000000;">975</td></tr>
+    <tr><td class="gt_row gt_left">SAS</td>
+<td class="gt_row gt_left">San Antonio Spurs</td>
+<td class="gt_row gt_left">West</td>
+<td class="gt_row gt_left">Southwest</td>
+<td class="gt_row gt_right" style="background-color: #FFBB70; color: #000000;">0.400</td>
+<td class="gt_row gt_left">24-36</td>
+<td class="gt_row gt_right" style="background-color: #FFD58D; color: #000000;">967</td></tr>
+    <tr><td class="gt_row gt_left">BKN</td>
+<td class="gt_row gt_left">Brooklyn Nets</td>
+<td class="gt_row gt_left">East</td>
+<td class="gt_row gt_left">Atlantic</td>
+<td class="gt_row gt_right" style="background-color: #FFFBBB; color: #000000;">0.517</td>
+<td class="gt_row gt_left">31-29</td>
+<td class="gt_row gt_right" style="background-color: #FFC77E; color: #000000;">951</td></tr>
+    <tr><td class="gt_row gt_left">POR</td>
+<td class="gt_row gt_left">Portland Trail Blazers</td>
+<td class="gt_row gt_left">West</td>
+<td class="gt_row gt_left">Northwest</td>
+<td class="gt_row gt_right" style="background-color: #FFC47A; color: #000000;">0.417</td>
+<td class="gt_row gt_left">25-35</td>
+<td class="gt_row gt_right" style="background-color: #FFC77E; color: #000000;">951</td></tr>
+    <tr><td class="gt_row gt_left">LAL</td>
+<td class="gt_row gt_left">Los Angeles Lakers</td>
+<td class="gt_row gt_left">West</td>
+<td class="gt_row gt_left">Pacific</td>
+<td class="gt_row gt_right" style="background-color: #FFDB94; color: #000000;">0.458</td>
+<td class="gt_row gt_left">27-32</td>
+<td class="gt_row gt_right" style="background-color: #FFC278; color: #000000;">945</td></tr>
+    <tr><td class="gt_row gt_left">WAS</td>
+<td class="gt_row gt_left">Washington Wizards</td>
+<td class="gt_row gt_left">East</td>
+<td class="gt_row gt_left">Southeast</td>
+<td class="gt_row gt_right" style="background-color: #FFDB94; color: #000000;">0.458</td>
+<td class="gt_row gt_left">27-32</td>
+<td class="gt_row gt_right" style="background-color: #FDB063; color: #000000;">924</td></tr>
+    <tr><td class="gt_row gt_left">NYK</td>
+<td class="gt_row gt_left">New York Knicks</td>
+<td class="gt_row gt_left">East</td>
+<td class="gt_row gt_left">Atlantic</td>
+<td class="gt_row gt_right" style="background-color: #FFC47A; color: #000000;">0.417</td>
+<td class="gt_row gt_left">25-35</td>
+<td class="gt_row gt_right" style="background-color: #F6904F; color: #000000;">898</td></tr>
+    <tr><td class="gt_row gt_left">SAC</td>
+<td class="gt_row gt_left">Sacramento Kings</td>
+<td class="gt_row gt_left">West</td>
+<td class="gt_row gt_left">Pacific</td>
+<td class="gt_row gt_right" style="background-color: #FAA159; color: #000000;">0.361</td>
+<td class="gt_row gt_left">22-39</td>
+<td class="gt_row gt_right" style="background-color: #F28548; color: #000000;">889</td></tr>
+    <tr><td class="gt_row gt_left">OKC</td>
+<td class="gt_row gt_left">Oklahoma City Thunder</td>
+<td class="gt_row gt_left">West</td>
+<td class="gt_row gt_left">Northwest</td>
+<td class="gt_row gt_right" style="background-color: #F07C43; color: #000000;">0.317</td>
+<td class="gt_row gt_left">19-41</td>
+<td class="gt_row gt_right" style="background-color: #F07A42; color: #000000;">881</td></tr>
+    <tr><td class="gt_row gt_left">IND</td>
+<td class="gt_row gt_left">Indiana Pacers</td>
+<td class="gt_row gt_left">East</td>
+<td class="gt_row gt_left">Central</td>
+<td class="gt_row gt_right" style="background-color: #F38649; color: #000000;">0.328</td>
+<td class="gt_row gt_left">20-41</td>
+<td class="gt_row gt_right" style="background-color: #EB6B3A; color: #000000;">870</td></tr>
+    <tr><td class="gt_row gt_left">DET</td>
+<td class="gt_row gt_left">Detroit Pistons</td>
+<td class="gt_row gt_left">East</td>
+<td class="gt_row gt_left">Central</td>
+<td class="gt_row gt_right" style="background-color: #D9271F; color: #FFFFFF;">0.237</td>
+<td class="gt_row gt_left">14-45</td>
+<td class="gt_row gt_right" style="background-color: #E86034; color: #000000;">862</td></tr>
+    <tr><td class="gt_row gt_left">ORL</td>
+<td class="gt_row gt_left">Orlando Magic</td>
+<td class="gt_row gt_left">East</td>
+<td class="gt_row gt_left">Southeast</td>
+<td class="gt_row gt_right" style="background-color: #D7191C; color: #FFFFFF;">0.230</td>
+<td class="gt_row gt_left">14-47</td>
+<td class="gt_row gt_right" style="background-color: #E3512D; color: #FFFFFF;">852</td></tr>
+    <tr><td class="gt_row gt_left" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: #00000000;">HOU</td>
+<td class="gt_row gt_left" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: #00000000;">Houston Rockets</td>
+<td class="gt_row gt_left" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: #00000000;">West</td>
+<td class="gt_row gt_left" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: #00000000;">Southwest</td>
+<td class="gt_row gt_right" style="background-color: #DF3F26; color: #FFFFFF; border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: #00000000;">0.254</td>
+<td class="gt_row gt_left" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: #00000000;">15-44</td>
+<td class="gt_row gt_right" style="background-color: #D7191C; color: #FFFFFF; border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: #00000000;">826</td></tr>
+  </tbody>
+  <tfoot class="gt_sourcenotes">
+    <tr>
+      <td class="gt_sourcenote" colspan="7">Date generated: 2022-02-26</td>
+    </tr>
+  </tfoot>
+  
+</table>
+</div></div>
+      </div>
+      <div class="col-sm-6">
+        <div id="picks" class="shiny-html-output shiny-bound-output" aria-live="polite"><div id="edwvpyipqo" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+  <style>@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+html {
+  font-family: Chivo, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#edwvpyipqo .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 3px;
+  border-top-color: rgba(0, 0, 0, 0);
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 3px;
+  border-bottom-color: rgba(0, 0, 0, 0);
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#edwvpyipqo .gt_heading {
+  background-color: #FFFFFF;
+  text-align: left;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#edwvpyipqo .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#edwvpyipqo .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 6px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#edwvpyipqo .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#edwvpyipqo .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 3px;
+  border-top-color: rgba(0, 0, 0, 0);
+  border-bottom-style: solid;
+  border-bottom-width: 3px;
+  border-bottom-color: #000000;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#edwvpyipqo .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: bolder;
+  text-transform: uppercase;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#edwvpyipqo .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: bolder;
+  text-transform: uppercase;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#edwvpyipqo .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#edwvpyipqo .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#edwvpyipqo .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 3px;
+  border-bottom-color: #000000;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#edwvpyipqo .gt_group_heading {
+  padding: 8px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: bolder;
+  text-transform: uppercase;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#edwvpyipqo .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: bolder;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#edwvpyipqo .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#edwvpyipqo .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#edwvpyipqo .gt_row {
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#edwvpyipqo .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: bolder;
+  text-transform: uppercase;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 12px;
+}
+
+#edwvpyipqo .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#edwvpyipqo .gt_first_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+}
+
+#edwvpyipqo .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#edwvpyipqo .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#edwvpyipqo .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#edwvpyipqo .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#edwvpyipqo .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#edwvpyipqo .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding: 4px;
+}
+
+#edwvpyipqo .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#edwvpyipqo .gt_sourcenote {
+  font-size: 12px;
+  padding: 4px;
+}
+
+#edwvpyipqo .gt_left {
+  text-align: left;
+}
+
+#edwvpyipqo .gt_center {
+  text-align: center;
+}
+
+#edwvpyipqo .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#edwvpyipqo .gt_font_normal {
+  font-weight: normal;
+}
+
+#edwvpyipqo .gt_font_bold {
+  font-weight: bold;
+}
+
+#edwvpyipqo .gt_font_italic {
+  font-style: italic;
+}
+
+#edwvpyipqo .gt_super {
+  font-size: 65%;
+}
+
+#edwvpyipqo .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 65%;
+}
+</style>
+  <table class="gt_table">
+  <thead class="gt_header">
+    <tr>
+      <th colspan="7" class="gt_heading gt_title gt_font_normal" style=""><strong>NBA Daily Picks</strong></th>
+    </tr>
+    <tr>
+      <th colspan="7" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style=""><em>Win probabilities based on Elo rating model inputs</em></th>
+    </tr>
+  </thead>
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">Matchup</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">Home Team Elo</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">Away Team Elo</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">Home Team Elo Home-Court Adjusted</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">Home Win Probability</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">Away Win Probability</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">Predicted Winner</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td class="gt_row gt_center">DET vs. BOS</td>
+<td class="gt_row gt_center">862</td>
+<td class="gt_row gt_center">1074</td>
+<td class="gt_row gt_center">912</td>
+<td class="gt_row gt_center" style="background-color: #D7191C; color: #FFFFFF;">28.2%</td>
+<td class="gt_row gt_center" style="background-color: #1A9641; color: #FFFFFF;">71.8%</td>
+<td class="gt_row gt_center" style="background-color: #D3D3D3; color: #000000;">BOS</td></tr>
+    <tr><td class="gt_row gt_center">ATL vs. TOR</td>
+<td class="gt_row gt_center">998</td>
+<td class="gt_row gt_center">1064</td>
+<td class="gt_row gt_center">1048</td>
+<td class="gt_row gt_center" style="background-color: #FFD993; color: #000000;">47.7%</td>
+<td class="gt_row gt_center" style="background-color: #D6EE97; color: #000000;">52.3%</td>
+<td class="gt_row gt_center" style="background-color: #D3D3D3; color: #000000;">TOR</td></tr>
+    <tr><td class="gt_row gt_center">CLE vs. WAS</td>
+<td class="gt_row gt_center">1046</td>
+<td class="gt_row gt_center">924</td>
+<td class="gt_row gt_center">1096</td>
+<td class="gt_row gt_center" style="background-color: #67B654; color: #000000;">72.9%</td>
+<td class="gt_row gt_center" style="background-color: #EC6E3B; color: #000000;">27.1%</td>
+<td class="gt_row gt_center" style="background-color: #D3D3D3; color: #000000;">CLE</td></tr>
+    <tr><td class="gt_row gt_center">MIA vs. SAS</td>
+<td class="gt_row gt_center">1099</td>
+<td class="gt_row gt_center">967</td>
+<td class="gt_row gt_center">1149</td>
+<td class="gt_row gt_center" style="background-color: #5CB051; color: #000000;">74.0%</td>
+<td class="gt_row gt_center" style="background-color: #E86236; color: #000000;">26.0%</td>
+<td class="gt_row gt_center" style="background-color: #D3D3D3; color: #000000;">MIA</td></tr>
+    <tr><td class="gt_row gt_center">CHI vs. MEM</td>
+<td class="gt_row gt_center">1088</td>
+<td class="gt_row gt_center">1123</td>
+<td class="gt_row gt_center">1138</td>
+<td class="gt_row gt_center" style="background-color: #FFF6B4; color: #000000;">52.2%</td>
+<td class="gt_row gt_center" style="background-color: #F5FBB6; color: #000000;">47.8%</td>
+<td class="gt_row gt_center" style="background-color: #D3D3D3; color: #000000;">CHI</td></tr>
+    <tr><td class="gt_row gt_center">MIL vs. BKN</td>
+<td class="gt_row gt_center">1050</td>
+<td class="gt_row gt_center">951</td>
+<td class="gt_row gt_center">1100</td>
+<td class="gt_row gt_center" style="background-color: #82C45D; color: #000000;">70.2%</td>
+<td class="gt_row gt_center" style="background-color: #F4894A; color: #000000;">29.8%</td>
+<td class="gt_row gt_center" style="background-color: #D3D3D3; color: #000000;">MIL</td></tr>
+    <tr><td class="gt_row gt_center" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: #00000000;">DEN vs. SAC</td>
+<td class="gt_row gt_center" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: #00000000;">1069</td>
+<td class="gt_row gt_center" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: #00000000;">889</td>
+<td class="gt_row gt_center" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: #00000000;">1119</td>
+<td class="gt_row gt_center" style="background-color: #1A9641; color: #FFFFFF; border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: #00000000;">79.0%</td>
+<td class="gt_row gt_center" style="background-color: #D7191C; color: #FFFFFF; border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: #00000000;">21.0%</td>
+<td class="gt_row gt_center" style="background-color: #D3D3D3; color: #000000; border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: #00000000;">DEN</td></tr>
+  </tbody>
+  <tfoot class="gt_sourcenotes">
+    <tr>
+      <td class="gt_sourcenote" colspan="7">Date generated: 2022-02-26</td>
+    </tr>
+  </tfoot>
+  
+</table>
+</div></div>
+      </div>
+    </div>
+  </div>
+
+
+</body></html>
