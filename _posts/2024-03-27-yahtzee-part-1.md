@@ -1,7 +1,7 @@
 ---
-title: Yahtzee Part 1: Expected value of maximizing a single roll
-subtitle: Or why you never hit your sixes late
-comments: true
+layout: post
+title: Adventures in Yahtzee probability, part 1
+subtitle: Or why getting three sixes is always such a pain
 author: Ben Wieland
 ---
 
