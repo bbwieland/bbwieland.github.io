@@ -121,7 +121,7 @@ plt.title("Expected Outcome of Targeting a Single Number on a Yahtzee Roll")
 ```
 
     
-![png](https://github.com/bbwieland/bbwieland.github.io/tree/blob/assets/img/yahtzee_sim_8_1.png)
+![image-embed-yahtzee-histogram](/assets/img/yahtzee_sim_8_1.png)
     
 
 ```python
