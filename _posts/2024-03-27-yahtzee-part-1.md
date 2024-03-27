@@ -110,7 +110,7 @@ results = pd.Series(results)
 counts = results.value_counts() / (runs)
 ```
 
-The below histogram displays our results, which are also provided in table format. Obtaining two of our desired roll is the most likely outcome, occurring almost 35 percent of the time. We throw at least a three of a kind 35.5 percent of the time, at least a four of a kind 10.4 percent of the time, and a Yahtzee 1.3 percent of the time.
+Obtaining two of our desired roll is the most likely outcome, occurring almost 35 percent of the time. We throw at least a three of a kind 35.5 percent of the time, at least a four of a kind 10.4 percent of the time, and a Yahtzee 1.3 percent of the time.
 
 
 ```python
@@ -120,19 +120,9 @@ plt.ylabel("Number of Occurrences in 1,000,000 Sims")
 plt.title("Expected Outcome of Targeting a Single Number on a Yahtzee Roll")
 ```
 
-
-
-
-    Text(0.5, 1.0, 'Expected Outcome of Targeting a Single Number on a Yahtzee Roll')
-
-
-
-
     
-![png](yahtzee_sim_files/yahtzee_sim_8_1.png)
+![png](assets/img/yahtzee_sim_8_1.png)
     
-
-
 
 ```python
 print("Probabilities of different outcomes:")
