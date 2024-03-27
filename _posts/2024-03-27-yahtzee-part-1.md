@@ -5,6 +5,8 @@ subtitle: Or why getting three sixes is always such a pain
 author: Ben Wieland
 ---
 
+This is the first post in a blog series on Yahtzee strategy. 
+
 ```python
 import pandas as pd
 import numpy as np
@@ -12,8 +14,6 @@ import matplotlib.pyplot as plt
 
 np.random.seed(4133)
 ```
-
-This is the first post in a series on Yahtzee strategy. 
 
 In Yahtzee, we frequently find ourselves attempting to maximize a specific number. Especially in the late game when attempting to hit that all-important 63 mark in the upper section (equivalent to a three-of-a-kind in every category ones through sixes), an unlucky early game in terms of upper-half rolls can force painful situations where we have no choice but to go for one number entering a roll or else risk losing our 35-point upper section bonus. In this post, we use simulation to calculate the probabilities of rolling each possible set of values in an "all-or-nothing" round with a particular emphasis on the odds of obtaining a three of a kind, four of a kind, or Yahtzee. We then calculate failure rates, or the chances of not obtaining the necessary three-of-a-kind or better to stay on pace for an upper section bonus, for varying numbers of attempted rolls. 
 
