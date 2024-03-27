@@ -1,5 +1,4 @@
 ---
-layout: post
 title: Yahtzee Part 1: Expected value of maximizing a single roll
 subtitle: Or why you never hit your sixes late
 comments: true
