@@ -3,6 +3,7 @@ layout: post
 title: Adventures in Yahtzee probability, part 1
 subtitle: Or why getting three sixes is always such a pain
 author: Ben Wieland
+tags: [python, simulation, yahtzee]
 ---
 
 This is the first post in a blog series on Yahtzee strategy. 
