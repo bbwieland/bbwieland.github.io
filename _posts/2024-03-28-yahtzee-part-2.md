@@ -156,7 +156,7 @@ plt.ylabel("Number of Occurrences in 100,000 Sims")
 plt.title("Expected Yahtzees When Playing With a Yahtzee Maximization Strategy")
 ```
     
-![image-embed-histogram](/assets/img/yahtzee_sim_12_1.png)
+![image-embed-histogram](/assets/img/yahtzee_maximization_12_1.png)
     
 
 Just for fun, a nice result from these simulations is a heuristic for the odds of throwing a Yahtzee on any given turn provided that you're rolling for a Yahtzee. This works out to about 4.5 percent, which is more likely than throwing five heads in a row with a fair coin. And hypothetically after 15 maximum-Yahtzee rolls in-game, you'd have a 50 percent chance to throw at least one. However, there's also a 10 percent chance you'll go 50 rolls without a single Yahtzee. I'm sure plenty of people can relate. 
