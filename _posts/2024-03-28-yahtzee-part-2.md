@@ -1,3 +1,11 @@
+---
+layout: post
+title: Adventures in Yahtzee probability, part 2
+subtitle: What if we only played to roll Yahtzees?
+author: Ben Wieland
+tags: [python, simulation, yahtzee]
+---
+
 This is the second post in a series on Yahtzee strategy. 
 
 What if we only played to roll Yahtzees? That is, on every roll we simply kept whichever number we rolled the most of in chasing that dopamine high of a Yahtzee — after all, it is what the game is named for. How many should we expect to obtain over the course of a single game? And why do we care?
