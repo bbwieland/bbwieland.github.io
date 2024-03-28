@@ -3,4 +3,6 @@ layout: page
 title: About Me
 ---
 
-My name is Ben Wieland. I currently work for the Philadelphia Phillies as a quantitative analyst. 
+currently: quantitative analyst @ the Philadelphia Phillies
+
+previously: research and development trainee @ the Atlanta Braves
