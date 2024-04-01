@@ -135,7 +135,7 @@ data from a multivariate Normal distribution.
 
 #### KenPom 2023 Histograms
 
-![img](assets/img/unnamed-chunk-2-1.png")
+![img](assets/img/unnamed-chunk-2-1.png)
 
 There is one caveat before we go just randomly sampling values:
 offensive and defensive ratings are not uncorrelated. Teams with good
@@ -188,7 +188,7 @@ teams <- map_dfr(.x = seq(1,362), .f = ~ generate_synthetic_team())
 Plotting our synthetic data confirms that it convincingly resembles the
 KenPom 2023 data.
 
-![img](assets/img/unnamed-chunk-6-1.png")
+![img](assets/img/unnamed-chunk-6-1.png)
 
 ## Generating and Simulating the Schedule
 
