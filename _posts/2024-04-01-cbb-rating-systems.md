@@ -1,5 +1,10 @@
-A Simulation Study of College Basketball Team Rating Systems
-================
+---
+layout: post
+title: How conferences affect college basketball team rating systems
+subtitle: Is the ACC getting screwed? Maybe
+author: Ben Wieland
+tags: [simulation, college basketball, r]
+---
 
 In February 2024, former Syracuse head coach Jim Boeheim called out Joe
 Lunardi — ESPN’s lead “bracketologist,” the man who coined that term and
