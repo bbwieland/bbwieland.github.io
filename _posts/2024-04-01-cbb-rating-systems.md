@@ -29,7 +29,7 @@ The ACC’s gripes with the selection committee’s metrics have perhaps the
 strongest basis in NCAA Tournament results of any major conference. Per
 BartTorvik, the conference leads the NCAA with almost 13 more wins than
 expected via predictive metrics entering the tournament between 2010 and
-2023. That number will almost assuredly rise following the conclusion of
+last season (2023). That number will almost assuredly rise following the conclusion of
 a 2024 tournament which saw the conference send three teams to the Elite
 Eight and an 11-seed to the Final Four. Over that same time period, the
 Big 12 and Mountain West — two frequent punching bags for
