@@ -147,7 +147,7 @@ simply plotting offensive and defensive ratings against one another.
 
 #### Offensive and Defensive Ratings Aren’t Independent
 
-![img](/assets/img/unnamed-chunk-3-1.png")
+![img](/assets/img/unnamed-chunk-3-1.png)
 
 #### Generating Synthetic Data
 
