@@ -137,6 +137,8 @@ data from a multivariate Normal distribution.
 
 ![img](/assets/img/unnamed-chunk-2-1.png)
 
+![img](/assets/img/unnamed-chunk-2-2.png)
+
 There is one caveat before we go just randomly sampling values:
 offensive and defensive ratings are not uncorrelated. Teams with good
 offenses also tend to have good defenses — something that everyone knows
@@ -279,7 +281,7 @@ against random teams and then use the team-ratings algorithm to estimate
 their performance. Remember, we’re looking for the estimated and actual
 ratings to match.
 
-![img](/assets/img/unnamed-chunk-7-1.png")
+![img](/assets/img/unnamed-chunk-7-1.png)
 
 How does that chart look for our four scheduling options with
 approximately 30 games per team apiece? The random schedule does the
@@ -290,7 +292,7 @@ grouping conferences based on team strength that real problems begin to
 emerge; when we don’t have *any* non-conference cross-pollination to
 work with, our team rating estimates seem almost no better than random.
 
-![img](/assets/img/unnamed-chunk-8-1.png")
+![img](/assets/img/unnamed-chunk-8-1.png)
 
 The below table puts some hard numbers to those charts — the mean
 absolute error of our estimates using the 30-game random schedule is
@@ -332,7 +334,7 @@ non-conference games to base those estimates on.
 
 The data pretty much confirm these priors:
 
-![img](/assets/img/unnamed-chunk-10-1.png")
+![img](/assets/img/unnamed-chunk-10-1.png)
 
 How do we get around the bubble problem? Remember, the raw actual
 ratings for college basketball correspond to the “True Conferences”
