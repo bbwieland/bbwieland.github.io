@@ -135,7 +135,7 @@ data from a multivariate Normal distribution.
 
 #### KenPom 2023 Histograms
 
-<img src="assets/img/unnamed-chunk-2-1.png" width="50%" style="display: block; margin: auto auto auto 0;" /><img src="assets/img/unnamed-chunk-2-2.png" width="50%" style="display: block; margin: auto auto auto 0;" />
+![img](assets/img/unnamed-chunk-2-1.png")
 
 There is one caveat before we go just randomly sampling values:
 offensive and defensive ratings are not uncorrelated. Teams with good
@@ -145,7 +145,7 @@ simply plotting offensive and defensive ratings against one another.
 
 #### Offensive and Defensive Ratings Aren’t Independent
 
-<img src="assets/img/unnamed-chunk-3-1.png" width="50%" style="display: block; margin: auto auto auto 0;" />
+![img](assets/img/unnamed-chunk-3-1.png")
 
 #### Generating Synthetic Data
 
@@ -188,7 +188,7 @@ teams <- map_dfr(.x = seq(1,362), .f = ~ generate_synthetic_team())
 Plotting our synthetic data confirms that it convincingly resembles the
 KenPom 2023 data.
 
-<img src="assets/img/unnamed-chunk-6-1.png" width="50%" style="display: block; margin: auto auto auto 0;" />
+![img](assets/img/unnamed-chunk-6-1.png")
 
 ## Generating and Simulating the Schedule
 
@@ -279,7 +279,7 @@ against random teams and then use the team-ratings algorithm to estimate
 their performance. Remember, we’re looking for the estimated and actual
 ratings to match.
 
-<img src="assets/img/unnamed-chunk-7-1.png" width="50%" style="display: block; margin: auto auto auto 0;" />
+![img](assets/img/unnamed-chunk-7-1.png")
 
 How does that chart look for our four scheduling options with
 approximately 30 games per team apiece? The random schedule does the
@@ -290,7 +290,7 @@ grouping conferences based on team strength that real problems begin to
 emerge; when we don’t have *any* non-conference cross-pollination to
 work with, our team rating estimates seem almost no better than random.
 
-<img src="assets/img/unnamed-chunk-8-1.png" width="50%" style="display: block; margin: auto auto auto 0;" />
+![img](assets/img/unnamed-chunk-8-1.png")
 
 The below table puts some hard numbers to those charts — the mean
 absolute error of our estimates using the 30-game random schedule is
@@ -332,7 +332,7 @@ non-conference games to base those estimates on.
 
 The data pretty much confirm these priors:
 
-<img src="assets/img/unnamed-chunk-10-1.png" width="50%" style="display: block; margin: auto auto auto 0;" />
+![img](assets/img/unnamed-chunk-10-1.png")
 
 How do we get around the bubble problem? Remember, the raw actual
 ratings for college basketball correspond to the “True Conferences”
