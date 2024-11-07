@@ -1,10 +1,10 @@
 ---
 layout: page
-title: About Me
+title: Who Am I?
 ---
 
-soon: quantitative analyst @ Philadelphia Phillies
+Currently, I develop generative Bayesian models as a quantitative analyst for the Philadelphia Phillies within R&D's predictive modeling department.
 
-currently: statistics and history student @ University of Virginia
+Previously, I worked as a research and development trainee for the Atlanta Braves and as a data analyst at the basketball analytics company ShotQuality. I earned bachelor's degrees in history & applied statistics at the University of Virginia in May 2024. 
 
-previously: research and development trainee @ Atlanta Braves
+I maintain the `fRisbee` R package for [open-source access to Ultimate Frisbee data](https://github.com/bbwieland/fRisbee/).
