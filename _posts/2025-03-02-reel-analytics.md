@@ -27,7 +27,7 @@ Recently, they went a step further: posting 40-yard dash forecasts for
 over 100 NFL Draft prospects on [their Twitter
 account](https://x.com/RAanalytics/status/1895463987216822590).
 
-![image-embed-tweet](assets/img/reel-tweet.png)
+![image-embed-tweet](/assets/img/reel-tweet.png)
 
 I’ve always been curious how the accuracy of these computer vision
 models holds up when put to the test, and public predictions mean public
@@ -72,6 +72,7 @@ rate.
 
 <details>
 <summary>Code for the plot</summary>
+
 ``` r
 total_preds = nrow(preds)
 correct_preds = sum(preds$value_within_ci)
@@ -88,9 +89,10 @@ ggplot(preds, aes(y=fct_reorder(paste0(player, " (", position, ")"), desc(pred_l
   labs(x = "40-Yard Dash Time", y = NULL, title = plot_title, subtitle = plot_subtitle) +
   theme(plot.title = element_text(face = "bold"))
 ```
+
 </details>
 
-![image-embed-validation](assets/img/reel-dash-validation.png)
+![image-embed-validation](/assets/img/reel-dash-validation.png)
 
 There’s not really a generous interpretation of these numbers: only
 about 1 in 10 predictions fell within the reported confidence interval!
