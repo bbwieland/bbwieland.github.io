@@ -52,7 +52,7 @@ for the answer and generate some [AI slop
 response](https://johnbedwards.io/blog/google_data_sci_slop/) while
 burning some trees down in the Amazon to power Grok’s GPUs while I’m at
 it, I just checked the actual calibration rates of the model against
-observed 2025 40-yard dash times.
+observed 2025 40-yard dash times.^[There is a very high chance that some rows are missing just because of OCR processing errors. These don't systemically affect the results, and I'm too lazy to chase them down.]
 
 This is pretty simple to do! Given the lower & upper bounds for each
 projection provided by Reel Analytics’s tweets, we can simply see if the
@@ -187,7 +187,7 @@ Achane ran a 4.32 and Matt Araiza ran a 4.68 – I guess “we are 95
 percent confident Quinn Ewers’s 40-yard dash will be slower than an
 explosive dual-threat receiving back, but faster than Kansas City’s
 punter” probably wouldn’t generate quite as much engagement. Regardless,
-the prediction would’ve been wrong: Ewers opted out of the 40, anyways.
+the prediction would’ve been wrong: Ewers opted out of the 40.
 
 # Model Performance
 
