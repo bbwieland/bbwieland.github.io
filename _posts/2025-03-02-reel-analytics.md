@@ -22,7 +22,7 @@ excluded from the public view entirely[^1], it’s a privilege to get a
 glance at what’s going on under the hood with these high-level computer
 vision tracking data models. Reel already generously provide an overview
 of their process in a [31-page
-whitepaper](https://reel-analytics.net/wp-content/uploads/2023/01/Technology_That_Wins_White_Paper_by_Recruiting_Analytics_121221.pdf)[^2]
+whitepaper](https://reel-analytics.net/wp-content/uploads/2023/01/Technology_That_Wins_White_Paper_by_Recruiting_Analytics_121221.pdf).[^2]
 Recently, they went a step further: posting 40-yard dash forecasts for
 over 100 NFL Draft prospects on [their Twitter
 account](https://x.com/RAanalytics/status/1895463987216822590).
@@ -98,8 +98,7 @@ There’s not really a generous interpretation of these numbers: only
 about 1 in 10 predictions fell within the reported confidence interval!
 Clearly, the reported intervals are far too precise.
 
-However, we can calculate what these confidence intervals “should have”
-been, we can calibrate them to the observed data, essentially answering
+We can calculate what these confidence intervals “should have” been, essentially answering
 the question “How wide do our confidence intervals on our predictions
 need to be for them to contain X% of the observed values?” Again, this
 is pretty easy to do! We simply:
@@ -182,7 +181,7 @@ interval of +/- 0.19 seconds.
 ![image-embed-tweet](/assets/img/reel-calibration-table.png)
 
 For Quinn Ewers, this would’ve given us a prediction interval with a
-lower bound of 4.295 and an upper bound of 4.675. For context, Devon
+lower bound of 4.30 and an upper bound of 4.68. For context, Devon
 Achane ran a 4.32 and Matt Araiza ran a 4.68 – I guess “we are 95
 percent confident Quinn Ewers’s 40-yard dash will be slower than an
 explosive dual-threat receiving back, but faster than Kansas City’s
