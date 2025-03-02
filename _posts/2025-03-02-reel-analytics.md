@@ -74,6 +74,7 @@ rate.
 <summary>Code for the plot</summary>
 
 ``` r
+
 total_preds = nrow(preds)
 correct_preds = sum(preds$value_within_ci)
 
@@ -88,6 +89,7 @@ ggplot(preds, aes(y=fct_reorder(paste0(player, " (", position, ")"), desc(pred_l
   theme_bw() +
   labs(x = "40-Yard Dash Time", y = NULL, title = plot_title, subtitle = plot_subtitle) +
   theme(plot.title = element_text(face = "bold"))
+
 ```
 
 </details>
@@ -114,6 +116,7 @@ is pretty easy to do! We simply:
 <summary>Code for finding minimum viable confidence intervals</summary>
 
 ``` r
+
 get_observed_calibration <- function(interval_width) {
   
   interval_preds <- preds %>%
@@ -123,9 +126,11 @@ get_observed_calibration <- function(interval_width) {
   
   return(mean(interval_preds$value_within_interval))
 }
+
 ```
 
 ``` r
+
 find_necessary_ci_width <- function(desired_calibration, step_size = 0.005) {
   
   calibration_pct = 0
@@ -144,9 +149,11 @@ find_necessary_ci_width <- function(desired_calibration, step_size = 0.005) {
   return(interval)
   
 }
+
 ```
 
 ``` r
+
 potential_calibration_rates <- c(0.5, 0.8, 0.9, 0.95)
 
 necessary_intervals <- c()
@@ -157,15 +164,18 @@ for (rate in potential_calibration_rates) {
 
 calibration_df <- data.frame(calibration_rate = potential_calibration_rates,
                              interval_width = necessary_intervals)
+
 ```
 
 ``` r
+
 calibration_df %>%
   gt::gt() %>%
   gt::cols_label(calibration_rate ~ 'Calibration Rate',
                  interval_width ~ "Confidence Interval") %>%
   gt::fmt_percent(calibration_rate, decimals = 0) %>%
   gt::cols_align('center')
+
 ```
 
 </details>
@@ -241,6 +251,7 @@ numbers easily.)
 <summary>Fitting and validating the baseline models</summary>
 
 ``` r
+
 clean_train <- train %>%
   janitor::clean_names() %>%
   # Only model the positions included in '25 combine data.
@@ -264,6 +275,7 @@ prep_train <- clean_train %>%
 # - a single-variable linear regression on position-standardized weight.
 position_baseline <- lm(dash ~ position, data=prep_train)
 weight_baseline <- lm(dash ~ weight, data=prep_train)
+
 ```
 
 I took these models for a spin against the full technical might of Reel
@@ -275,6 +287,7 @@ Reel CEO’s LinkedIn post above, as well as two more traditional machine
 learning metrics: mean absolute error and root mean squared error.[^8]
 
 ``` r
+
 clean_preds <- preds %>% 
   # Only including positions we can predict over (i.e. that ran a 40 in '24)
   dplyr::filter(position %in% clean_train$position) %>%
@@ -290,18 +303,22 @@ full_pred_df <- clean_preds %>%
   dplyr::mutate(reel_model_residual = obs_time - pred_value,
                 position_baseline_residual = obs_time - baseline_pred,
                 weight_baseline_residual = obs_time - weight_pred)
+
 ```
 
 ``` r
+
 preds_long <- full_pred_df %>%
   dplyr::select(player, position, college, 
                 reel_model_residual, position_baseline_residual, weight_baseline_residual) %>%
   tidyr::pivot_longer(cols = c(reel_model_residual, position_baseline_residual, weight_baseline_residual), 
                       names_to = 'model_type', values_to = 'residual', 
                       names_transform = function (x) gsub("_residual", '', x))
+
 ```
 
 ``` r
+
 pred_performance_table <- preds_long %>%
   group_by(model_type) %>%
   summarise(hi_accuracy = sum(abs(residual) <= 0.05) / n(), 
@@ -311,9 +328,11 @@ pred_performance_table <- preds_long %>%
             rmse = sqrt(mean(residual ^ 2))) %>%
   mutate(model_type = gsub("_", " ", model_type)) %>%
   mutate(model_type = stringr::str_to_title(model_type))
+
 ```
 
 ``` r
+
 pred_performance_table %>%
   gt::gt() %>%
   gt::cols_label(hi_accuracy ~ "<= 0.05", 
@@ -326,6 +345,7 @@ pred_performance_table %>%
   gt::fmt_percent(gtExtras::contains('accuracy'), decimals = 0) %>%
   gt::cols_align('center') %>%
   gt::fmt_number(c(mae, rmse), decimals = 4)
+
 ```
 
 </details>
