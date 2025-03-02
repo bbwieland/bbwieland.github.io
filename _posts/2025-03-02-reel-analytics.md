@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Reel Analytics 40 times and model calibration
-subtitle: Bottom line: Validate your models against a baseline
+subtitle: Always validate your models against a baseline
 author: Ben Wieland
 tags: [r, football]
 ---
