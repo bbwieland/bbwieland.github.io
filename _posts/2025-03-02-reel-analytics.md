@@ -42,7 +42,7 @@ narrow confidence intervals. For some players, the variation between the
 “low” and “high” projected 40-yard dash times spanned 0.03 seconds,
 while for others like Texas QB Quinn Ewers the model [predicted an
 incredibly narrow confidence
-interval](%5E%5Bhttps://x.com/RAanalytics/status/1895176828924633587%5D)
+interval](https://x.com/RAanalytics/status/1895463987216822590)
 of 0.01 seconds.
 
 After clicking on that tweet containing Ewers’s projected 40-yard dash
@@ -111,6 +111,9 @@ is pretty easy to do! We simply:
 2.  Find the smallest possible confidence interval width which contains
     some percentage of the observed data, given our predictions.[^5]
 
+<details>
+<summary>Code for finding minimum viable confidence intervals</summary>
+
 ``` r
 get_observed_calibration <- function(interval_width) {
   
@@ -157,14 +160,6 @@ calibration_df <- data.frame(calibration_rate = potential_calibration_rates,
                              interval_width = necessary_intervals)
 ```
 
-I found these necessary confidence interval widths for a few possible
-calibration rates. As it turns out, 50 percent of the observed 40-yard
-dash times fell within +/- 0.06 seconds of the Reel Analytics prediction
-– a far cry from the supplied confidence intervals of +/- 0.01 seconds,
-but not bad! To achieve that 95 percent confidence level common in both
-statistical literature and the popular imagination, we need a confidence
-interval of +/- 0.19 seconds.
-
 ``` r
 calibration_df %>%
   gt::gt() %>%
@@ -173,6 +168,18 @@ calibration_df %>%
   gt::fmt_percent(calibration_rate, decimals = 0) %>%
   gt::cols_align('center')
 ```
+
+</details>
+
+I found these necessary confidence interval widths for a few possible
+calibration rates. As it turns out, 50 percent of the observed 40-yard
+dash times fell within +/- 0.06 seconds of the Reel Analytics prediction
+– a far cry from the supplied confidence intervals of +/- 0.01 seconds,
+but not bad! To achieve that 95 percent confidence level common in both
+statistical literature and the popular imagination, we need a confidence
+interval of +/- 0.19 seconds.
+
+![image-embed-tweet](/assets/img/reel-calibration-table.png)
 
 For Quinn Ewers, this would’ve given us a prediction interval with a
 lower bound of 4.295 and an upper bound of 4.675. For context, Devon
@@ -230,6 +237,9 @@ just looking at a guy’s listed position or his listed weight to project
 his 40-yard dash time, what are you doing? I bet any scout – or probably
 any sufficiently committed college football fan – could beat these
 numbers easily.)
+
+<details>
+<summary>Fitting and validating the baseline models</summary>
 
 ``` r
 clean_train <- train %>%
@@ -318,6 +328,10 @@ pred_performance_table %>%
   gt::cols_align('center') %>%
   gt::fmt_number(c(mae, rmse), decimals = 4)
 ```
+
+</details>
+
+![image-embed-tweet](/assets/img/reel-accuracy-table.png)
 
 Wow! Sure, by LinkedIn standards we got our asses kicked in “High
 Accuracy” predictions: 45% of Reel’s predictions fell within 0.05
