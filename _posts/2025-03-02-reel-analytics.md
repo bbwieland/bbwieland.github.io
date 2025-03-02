@@ -52,7 +52,7 @@ for the answer and generate some [AI slop
 response](https://johnbedwards.io/blog/google_data_sci_slop/) while
 burning some trees down in the Amazon to power Grok’s GPUs while I’m at
 it, I just checked the actual calibration rates of the model against
-observed 2025 40-yard dash times.^[There is a very high chance that some rows are missing just because of OCR processing errors. These don't systemically affect the results, and I'm too lazy to chase them down.]
+observed 2025 40-yard dash times.
 
 This is pretty simple to do! Given the lower & upper bounds for each
 projection provided by Reel Analytics’s tweets, we can simply see if the
@@ -385,7 +385,7 @@ If you’re a sports tech investor looking to invest, don’t.
 [^3]: It’s beyond the scope of this piece to describe how I did this,
     but essentially I ripped an old Thomas Mock blog post to perform OCR
     on the Reel Analytics twitter images & then post-processed some of
-    the obviously wrong values to clean everything up.
+    the obviously wrong values to clean everything up. There's a good chance some data get dropped due to OCR errors, but it doesn't affect many values & doesn't systemically affect the results.
 
 [^4]: Although this is kinda bullshit – see
     <https://github.com/easystats/bayestestR/discussions/250>
