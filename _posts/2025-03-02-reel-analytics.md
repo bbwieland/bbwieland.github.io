@@ -412,7 +412,7 @@ If you’re a sports tech investor looking to invest, don’t.
 
 [^5]: I am bad at programming and also lazy, so I did this with
     non-vectorized `for` loops, but you can definitely do this more
-    efficiently.
+    efficiently. Also, my sincerest apologies that the code embeds do not work and are essentially unreadable.
 
 [^6]: Sports Reference sites do not allow scraping, so to get the data I
     first downloaded it as an Excel workbook, opened it in read-only
