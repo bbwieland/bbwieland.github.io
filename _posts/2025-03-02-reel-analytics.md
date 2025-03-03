@@ -322,7 +322,7 @@ preds_long <- full_pred_df %>%
 pred_performance_table <- preds_long %>%
   group_by(model_type) %>%
   summarise(hi_accuracy = sum(abs(residual) <= 0.05) / n(), 
-            md_accuracy = sum(abs(residual) <= 0.10 & abs(residual >= 0.05)) / n(),
+            md_accuracy = sum(abs(residual) <= 0.10 & abs(residual) >= 0.05) / n(),
             lo_accuracy = sum(abs(residual) > 0.10) / n(), 
             mae = mean(abs(residual)),
             rmse = sqrt(mean(residual ^ 2))) %>%
@@ -395,6 +395,8 @@ these data, don’t pay for them. If the school recruiting you *does* want
 to see these data, commit to a different school.
 
 If you’re a sports tech investor looking to invest, don’t.
+
+*Note: A previous version of this table contained incorrect values in the "Medium" accuracy range of the model evaluation table. This error has now been fixed, and the table values displayed are correct.
 
 [^1]: Source: I work in baseball.
 
