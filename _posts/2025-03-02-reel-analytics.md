@@ -396,7 +396,7 @@ to see these data, commit to a different school.
 
 If you’re a sports tech investor looking to invest, don’t.
 
-*Note: A previous version of this table contained incorrect values in the "Medium" accuracy range of the model evaluation table. This error has now been fixed, and the table values displayed are correct.
+*Note: A previous version of this table contained incorrect values in the "Medium" accuracy range of the model evaluation table. This error has now been fixed, and the table values displayed are correct.*
 
 [^1]: Source: I work in baseball.
 
