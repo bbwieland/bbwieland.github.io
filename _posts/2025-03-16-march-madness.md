@@ -28,7 +28,9 @@ $S_i = E_i * V_i$
 
 A team's final score is a function of its efficiency $E$ and its "volume," or pace, $V$.
 
+```math
 $E_i \sim N(\mu_i, \sigma_i)$
+```
 
 The efficiency of a team in a given game is normally distributed about some average efficiency $\mu_i$. Note that we are abusing the notation of $i$ here -- we'll use $i$ to index team IDs and also, as we do when we write $E_i$, use $i$ to represent the specific matchup between teams $i$ and $j$. 
 
