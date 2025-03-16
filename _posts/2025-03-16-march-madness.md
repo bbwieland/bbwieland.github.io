@@ -83,7 +83,14 @@ And that's it! We can plug this model into any probabilistic programming languag
 
 | Season | M Brier | W Brier |
 | -----| ------- | ------- |
-| 2015 | 0 | 0
-| 2016 | 0 | 0
+| 2015 | 0.173 | 0.123
+| 2016 | 0.188 | 0.153
+| 2017 | 0.180 | 0.135
+| 2018 | 0.202 | 0.158
+| 2019 | 0.171 | 0.136
+| 2021 | 0.212 | 0.156
+| 2022 | 0.223 | 0.145
+| 2023 | 0.215 | 0.170
+| 2024 | 0.194 | 0.131
 
 # Some final thoughts
