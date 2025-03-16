@@ -77,7 +77,40 @@ Finally, we set priors on some of the "average" league-wide effects. These were 
 
 And that's it! We can plug this model into any probabilistic programming language and sample it, then use the posterior distribution to simulate each team matchup. I ran 1000 matchups between each team to get my final probabilities that I submitted on Kaggle, but theoretically it's very easy to run more. I used PyMC with the default sampler, 1000 burn-in draws, and 1000 posterior draws across 4 chains. Running everything on my Apple M1 chip with 8GB RAM took about 4 minutes total for the 2025 season -- 2 minutes for the men's and women's predictions, respectively -- and better specs would make it very easy to run faster. 
 
-# Validation and team strength estimates
+# Team strength estimates
+
+By summing a team's $\theta_{O}$ and $\theta_{D}$ parameters, we can estimate their net rating. This rating can be interpreted as how many points per possession the team would outscore an average team by on a neutral court.
+
+### Men's Top 10
+
+| Team | Net Rating |
+| ---- | ---------- |
+| XXXX | XXXX |
+| XXXX | XXXX |
+| XXXX | XXXX |
+| XXXX | XXXX |
+| XXXX | XXXX |
+| XXXX | XXXX |
+| XXXX | XXXX |
+| XXXX | XXXX |
+| XXXX | XXXX |
+| XXXX | XXXX |
+
+
+### Women's Top 10
+
+| Team | Net Rating |
+| ---- | ---------- |
+| XXXX | XXXX |
+| XXXX | XXXX |
+| XXXX | XXXX |
+| XXXX | XXXX |
+| XXXX | XXXX |
+| XXXX | XXXX |
+| XXXX | XXXX |
+| XXXX | XXXX |
+| XXXX | XXXX |
+| XXXX | XXXX |
 
 # Backtesting the model
 
@@ -94,3 +127,11 @@ And that's it! We can plug this model into any probabilistic programming languag
 | 2024 | 0.194 | 0.131
 
 # Some final thoughts
+
+- For the 2025 men's season, our estimated values of the $\eta$ parameters which govern the team-to-team variation in skill ratings were higher than for any previous men's season. This reflects the increasing inequality in NCAAM basketball, which plenty of pundits have speculated on as a byproduct of the transfer portal and NIL era. For what it's worth, I think this critique is spot-on.
+
+- By contract, the $\eta$ parameters for the *women's* game, while still higher than the men's, are smaller than they've been since 2015. The playing field is more level in NCAAW than it's been for a decade.
+
+- 2025 Duke earned the highest rating of any men's team between 2015 and 2025, very narrowly edging 2015 Kentucky. Other standout teams with net ratings above 0.3: 2015 Wisconsin, 2017 Gonzaga, 2019 Gonzaga, 2024 Houston, 2025 Auburn, 2025 Houston.
+
+- The highest-ranked overall teams in the backtesting timeframe? Those would be 2015, 2016, and 2018 UConn on the women's side, the only three teams with estimated net ratings above 0.6 in the dataset.
