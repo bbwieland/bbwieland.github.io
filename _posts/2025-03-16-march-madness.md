@@ -81,4 +81,9 @@ And that's it! We can plug this model into any probabilistic programming languag
 
 # Backtesting the model
 
+| Season | M Brier | W Brier |
+| -----| ------- | ------- |
+| 2015 | 0 | 0
+| 2016 | 0 | 0
+
 # Some final thoughts
