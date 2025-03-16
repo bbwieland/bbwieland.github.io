@@ -37,7 +37,7 @@ $\mu_i = \mathcal{E} + \mathcal{H} * H_i + \theta_{i,O} - \theta_{j,D}$
 
 Team $i$'s expected efficiency is a function of four variables: the league-average efficiency $\mathcal{E}$, the league-average home-court advantage $\mathcal{H}$ multiplied by an indicator variable $H_i$ equal to 1 if team $i$ is playing at home and 0 otherwise, and the team-strength parameters $\theta$. 
 
-These parameters are indexed by team -- the $i$ and $j$ -- and whether the team is on offense or defense (the $O$ and $D$), and we define them such that a higher value is better on both sides of the court. For example, if $\theta_{i,O} = 0.1$ then team $i$ is 10 points better offensively per 100 possessions than the average team and if $\theta_{j, D} = 0.1$ then team $j$ is 10 points better defensively per 100 possessions than the average team. 
+These parameters are indexed by team -- the $i$ and $j$ -- and whether the team is on offense or defense - the $O$ and $D$ - and we define them such that a higher value is better on both sides of the court. For example, if $\theta_{i,O} = 0.1$ then team $i$ is 10 points better offensively per 100 possessions than the average team and if $\theta_{j, D} = 0.1$ then team $j$ is 10 points better defensively per 100 possessions than the average team. 
 
 For estimating the efficiency of team $j$, we can simply flip the sign before the home-court advantage effect.
 
