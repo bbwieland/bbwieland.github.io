@@ -7,6 +7,14 @@ tags: [python, bayes]
 mathjax: true
 ---
 
+For my Kaggle March Madness submission this year, I planned to put together a canonical "baseline" model to predict team-level efficiency ratings based solely on pace and effiency. From there, the goal was to ensemble with a fancier model to pick up on possible interactions between different styles of play while anchoring to the baseline predictions so we didn't overfit too heavily to those style-of-play interactions.
+
+However, time and work got the best of me, so all I managed to get around to was fitting the baseline model! However, I still think it's valuable to share my modeling approach as a reference for how to implement what is essentially Bayesian KenPom. There are all sorts of improvements that could be made on this model, but it's what I've got, so it's what I'm writing up here.
+
+Code for the project lives in [this repository](https://github.com/bbwieland/march-machine-learning-mania-2025).
+
+Team ratings for every team live on [this Google Sheet](https://docs.google.com/spreadsheets/d/1n8kDnzpBRsgWfMBb8dPV3YbTGfIFRopLRNXfn4gsrws/edit?usp=sharing).
+
 # How the model works
 
 Consider a matchup between a home and away team: $i$ and $j$. Our goal for the competition this year is simply to predict whether team $i$ beats team $j$ in a given matchup -- a problem that naturally seems to lend itself to some sort of categorical model, given the binary nature of the response variable. However, we can easily turn this into a continuous prediction problem. Since the probability of $i$ beating $j$ is equal to the probability of $i$ out-scoring $j$ and the final score of a game is a continuous variable, we can write the probability of $i$ beating $j$ as $P(S_i > S_j)$ where $S$ denotes the score.
@@ -81,38 +89,41 @@ And that's it! We can plug this model into any probabilistic programming languag
 
 By summing a team's $\theta_{O}$ and $\theta_{D}$ parameters, we can estimate their net rating. This rating can be interpreted as how many points per possession the team would outscore an average team by on a neutral court.
 
-### Men's Top 10
+For ease of interpretation, I've multiplied all these values by 100 to put them on the same scale as other efficiency metrics such as KenPom. The values in the table can be interpreted as how many points per 100 possessions a team would outscore an average team by on a neutral court. To translate per-100-possession values to game-level values, as a rule of thumb you can multiply by 0.7. So, for example, Duke would be expected to outscore an average team by 34.3 * 0.7 = 24 points in a standard-length game of 70 possessions.
+
+## Men's Top 10
 
 | Team | Net Rating |
 | ---- | ---------- |
-| XXXX | XXXX |
-| XXXX | XXXX |
-| XXXX | XXXX |
-| XXXX | XXXX |
-| XXXX | XXXX |
-| XXXX | XXXX |
-| XXXX | XXXX |
-| XXXX | XXXX |
-| XXXX | XXXX |
-| XXXX | XXXX |
+| Duke | 34.3 |
+| Auburn | 30.7 |
+| Houston | 30.7 |
+| Florida | 29.6 |
+| Alabama | 25.6 |
+| Tennessee | 25.6 |
+| Gonzaga | 25.4 |
+| Texas Tech | 24.2 |
+| Maryland | 23.8 |
+| Iowa State | 22.9 |
 
-
-### Women's Top 10
+## Women's Top 10
 
 | Team | Net Rating |
 | ---- | ---------- |
-| XXXX | XXXX |
-| XXXX | XXXX |
-| XXXX | XXXX |
-| XXXX | XXXX |
-| XXXX | XXXX |
-| XXXX | XXXX |
-| XXXX | XXXX |
-| XXXX | XXXX |
-| XXXX | XXXX |
-| XXXX | XXXX |
+| UConn | 54.7 |
+| South Carolina | 53.8 |
+| Texas | 50.0 |
+| UCLA | 46.1 |
+| Notre Dame | 45.5 |
+| USC | 45.0 |
+| Duke | 41.4 |
+| TCU | 40.5 |
+| LSU | 38.9 |
+| Kansas State | 38.8 |
 
 # Backtesting the model
+
+We can calculate historic Brier scores for this model dating back to 2015. As expected, the women's tournament is easier to predict than the men's tournament given the relative lack of upsets on the women's side and the higher frequency of unequal matchups. 
 
 | Season | M Brier | W Brier |
 | -----| ------- | ------- |
@@ -128,6 +139,8 @@ By summing a team's $\theta_{O}$ and $\theta_{D}$ parameters, we can estimate th
 
 # Some final thoughts
 
+## On the model outputs
+
 - For the 2025 men's season, our estimated values of the $\eta$ parameters which govern the team-to-team variation in skill ratings were higher than for any previous men's season. This reflects the increasing inequality in NCAAM basketball, which plenty of pundits have speculated on as a byproduct of the transfer portal and NIL era. For what it's worth, I think this critique is spot-on.
 
 - By contract, the $\eta$ parameters for the *women's* game, while still higher than the men's, are smaller than they've been since 2015. The playing field is more level in NCAAW than it's been for a decade.
@@ -135,3 +148,9 @@ By summing a team's $\theta_{O}$ and $\theta_{D}$ parameters, we can estimate th
 - 2025 Duke earned the highest rating of any men's team between 2015 and 2025, very narrowly edging 2015 Kentucky. Other standout teams with net ratings above 0.3: 2015 Wisconsin, 2017 Gonzaga, 2019 Gonzaga, 2024 Houston, 2025 Auburn, 2025 Houston.
 
 - The highest-ranked overall teams in the backtesting timeframe? Those would be 2015, 2016, and 2018 UConn on the women's side, the only three teams with estimated net ratings above 0.6 in the dataset.
+
+## On the competition
+
+- I've submitted two versions of my predictions here: one with the outputs as-is and one which "cheats" by over-confidently rounding all predictions to be at least 65 percent sure of the winner in each game. This makes your expected Brier score worse, but improves your tail probability of scoring a high enough submission to win the competition.
+
+- It's a feature of the scoring format that the long-run optimal prediction model is *not* the best submission to place 1st in the competition. I believe this model setup, which is fairly canonical within the matchup-modeling literature, would outperform most submissions to the Kaggle competition in the long run given its performance relative to the expert baseline proposed on Kaggle but stands zero chance of actually winning in any given year. The longer I submit to this contest, the more I believe that the optimal way to submit is to fit a "canonical" model similar to this one or an Elo-based model and then use those outputs as inputs to a downstream deep-learning model. Alternatively, one could ensemble the "simple" predictions with a fancier model. There's some balance between novelty and overall prediction accuracy that needs to be struck such that your model is still *good* but also *different* from the other "good" models.
