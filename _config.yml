@@ -23,7 +23,7 @@ repository               : "bbwieland/bbwieland.github.io"
 #               Additional customization can be done by editing /_includes/author-profile.html
 author:
   # Biographic information
-  avatar           : "https://bbwieland.github.io/files/headshot2.png"
+  avatar           : "https://bbwieland.github.io/files/headshot.png"
   name             : "Ben Wieland"
   pronouns         : # example: "she/her"  
   bio              : "Lead Quantitative Analyst, Philadelphia Phillies"
