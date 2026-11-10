@@ -23,16 +23,16 @@ redirect_from:
 ## Work Experience
 ======
 
-#### Philadelphia Phillies, Lead Quantitative Analyst
+### Philadelphia Phillies, Lead Quantitative Analyst
 
-#### Atlanta Braves, Research & Development Trainee
+### Atlanta Braves, Research & Development Trainee
 
-#### University of Virginia, Research Assistant & Teaching Assistant
+### University of Virginia, Research Assistant & Teaching Assistant
 
 
-## Skills
+# Skills
 ======
 
-#### Methods
+### Methods
 
-#### Programming Languages
+### Programming Languages
