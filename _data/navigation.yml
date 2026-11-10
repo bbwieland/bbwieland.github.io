@@ -11,5 +11,8 @@ main:
   - title: "Bio"
     url: /markdown/
 
+  - title: "CV"
+    url: /cv/
+
   - title: "Posts"
     url: /year-archive/
