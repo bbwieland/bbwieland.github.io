@@ -154,14 +154,13 @@
   }
 
   img {
-    max-width: 175px;
+    display: block;
+    width: 175px;
+    max-width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
     border-radius: 50%;
-    border: 2px solid var(--global-text-color);
-
-    @include breakpoint($large) {
-      padding: 5px;
-      border: 2px solid var(--global-text-color);
-    }
+    border: 1px solid var(--global-text-color);
   }
 }
 

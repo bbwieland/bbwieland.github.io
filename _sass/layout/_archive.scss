@@ -43,6 +43,7 @@
 .archive__item-title {
   margin-bottom: 0.25em;
   font-family: $sans-serif-narrow;
+  font-size: 12px;
 
   a + a {
     opacity: 0.5;
@@ -51,9 +52,15 @@
 
 .archive__item-date {
   font-family: $sans-serif;
-  font-size: $type-size-6;
-  color: var(--global-text-color-light);
+  font-size: 12px;
+  color: var(--global-text-color);
   font-weight: normal;
+  text-decoration: none;
+
+  &:hover {
+    color: var(--global-text-color-light);
+    text-decoration: none;
+  }
 }
 
 /* remove border*/
@@ -87,7 +94,7 @@
     box-shadow: 0 0 10px rgba(#000, 0.25);
   }
 
-  .archive__item-title {
+  .archive__item-title a {
     text-decoration: underline;
   }
 }

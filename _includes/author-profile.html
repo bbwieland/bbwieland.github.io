@@ -7,7 +7,9 @@
 <div itemscope itemtype="http://schema.org/Person">
 
   {% if author.avatar %}
-    <img src="{{ author.avatar }}" alt="{{ author.name }}" class="author__avatar">
+    <div class="author__avatar">
+      <img src="{% if author.avatar contains '://' %}{{ author.avatar }}{% else %}{{ author.avatar | prepend: base_path }}{% endif %}" alt="{{ author.name }}">
+    </div>
   {% endif %}
 
   <div class="author__content">
