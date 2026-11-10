@@ -16,6 +16,7 @@
 
   a {
     text-decoration: underline;
+    color: var(--global-text-color);
 
     &:hover {
       text-decoration: underline;
@@ -46,6 +47,13 @@
   a + a {
     opacity: 0.5;
   }
+}
+
+.archive__item-date {
+  font-family: $sans-serif;
+  font-size: $type-size-6;
+  color: var(--global-text-color-light);
+  font-weight: normal;
 }
 
 /* remove border*/
