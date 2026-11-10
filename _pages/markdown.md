@@ -14,7 +14,7 @@ redirect_from:
 
 Howdy! I graduated from the University of Virginia in 2024 and took a job with the Philadelphia Phillies, where I work as a Lead Quantitative Analyst in the Pitching Research department. I'm an expert in Bayesian modeling, with a focus on continuous state-space models & efficient inference.
 
-You can check out my [Goodreads](https://www.goodreads.com/user/show/196978973?ref=nav_profile_l), [Letterboxd](https://letterboxd.com/bennyboy82/), and [Strava](https://www.strava.com/athletes/63497939) for intermittent life updates, or tab on over to Life Updates for a "what I'm up to" refresh.
+You can check out my [Goodreads](https://www.goodreads.com/user/show/196978973?ref=nav_profile_l), [Letterboxd](https://letterboxd.com/bennyboy82/), and [Strava](https://www.strava.com/athletes/63497939) for intermittent life updates, or tab on over to Life Updates for a "what I'm up to" refresh. I currently live in Philadelphia near Rittenhouse Square.
 
 ## Current Recommendations
 
