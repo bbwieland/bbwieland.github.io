@@ -26,4 +26,6 @@ You can check out my [Goodreads](https://www.goodreads.com/user/show/196978973?r
 
 * **Defector:** The best blogs on the Internet, [here](https://defector.com/).
 
-* **FanGraphs**
+* **FanGraphs:** The best baseball blog site on the Internet; the best baseball blogger's on Substack at Pebble Hunting [here](https://pebblehunting.substack.com/).
+
+* **The Peter Shamshiri cinematic universe**: Podcasts [If Books Could Kill](https://www.ifbookspod.com/) & [5-4](https://www.fivefourpod.com/) along with his blog, [String in a Maze](https://stringinamaze.net/).
