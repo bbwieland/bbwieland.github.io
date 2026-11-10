@@ -11,7 +11,7 @@ redirect_from:
 
 ## Education
 
-#### University of Virginia
+### University of Virginia
 
 * August 2021 to May 2024
 * B.A. Applied Statistics & B.A. History

@@ -43,7 +43,7 @@
 .archive__item-title {
   margin-bottom: 0.25em;
   font-family: $sans-serif-narrow;
-  font-size: 12px;
+  font-size: 16px;
 
   a + a {
     opacity: 0.5;
@@ -52,7 +52,7 @@
 
 .archive__item-date {
   font-family: $sans-serif;
-  font-size: 12px;
+  font-size: 16px;
   color: var(--global-text-color);
   font-weight: normal;
   text-decoration: none;
