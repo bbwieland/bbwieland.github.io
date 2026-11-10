@@ -1,6 +1,6 @@
 ---
 permalink: /
-title: "About Me"
+title: "Howdy!"
 author_profile: true
 redirect_from: 
   - /home/
