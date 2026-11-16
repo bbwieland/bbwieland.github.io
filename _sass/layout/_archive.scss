@@ -41,6 +41,7 @@
 }
 
 .archive__item-title {
+  margin-top: 0;
   margin-bottom: 0.25em;
   font-family: $sans-serif-narrow;
   font-size: 24px;
@@ -105,7 +106,7 @@
    ========================================================================== */
 
 .list__item {
-  margin-bottom: 0.5em;
+  margin-bottom: 1.5em;
 
   @include breakpoint($medium) {
     padding-right: $right-sidebar-width-narrow;
