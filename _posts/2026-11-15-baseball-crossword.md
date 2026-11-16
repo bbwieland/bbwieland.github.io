@@ -1,6 +1,6 @@
 ---
 title: 'Which MLB players occur most frequently in crossword grids?'
-date: 2026-08-06
+date: 2026-11-15
 permalink: /posts/2026/11/mlb-baseball-crossword-frequency/
 tags:
   - crosswords
